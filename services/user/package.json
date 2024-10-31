@@ -29,5 +29,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "dependencies": {
+    "auth0": "^4.10.0"
   }
 }

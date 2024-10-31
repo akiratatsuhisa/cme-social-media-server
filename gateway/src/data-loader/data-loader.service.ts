@@ -7,7 +7,7 @@ import { FilterKey, FilterProps } from './data-loader.types';
 export class DataLoaderService {
   private readonly loaders: Map<string, DataLoader<any, any>> = new Map();
 
-  getDataLoader<F extends FilterProps, K, V, C = K>(
+  get<F extends FilterProps, K, V, C = K>(
     filterKey: FilterKey<F>,
     batchLoadFn: DataLoader.BatchLoadFn<K, V>,
     options?: DataLoader.Options<K, V, C>,

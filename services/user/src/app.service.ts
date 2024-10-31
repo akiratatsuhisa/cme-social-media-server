@@ -77,7 +77,7 @@ export class AppService {
     }
   }
 
-  async getUserInfoOrThrow(sub: string): Promise<IIdentityUser> {
+  async getCurrentUserInfoOrThrow(sub: string): Promise<IIdentityUser> {
     const key = `${this.cachePrefix}:${sub}`;
     const cache = await this.cacheManager.get<string>(key);
 

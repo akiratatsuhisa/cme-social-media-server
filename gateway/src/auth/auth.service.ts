@@ -18,7 +18,7 @@ export class AuthService {
       this.client.send<
         UserService.GetUserInfo.Result,
         UserService.GetUserInfo.Input
-      >('getUserInfo', { token, payload }),
+      >(UserService.GetUserInfo.pattern, { token, payload }),
     );
 
     return result;

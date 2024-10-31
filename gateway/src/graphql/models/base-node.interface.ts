@@ -1,6 +1,6 @@
 import { Field, InterfaceType } from '@nestjs/graphql';
+import { User } from 'src/user/types';
 
-// import { User } from 'src/users/types';
 import { ISODateTimeScalar } from '../scalars';
 
 @InterfaceType()
@@ -11,8 +11,8 @@ export abstract class BaseNode {
   @Field(() => ISODateTimeScalar)
   createdAt: string;
 
-  // @Field(() => User)
-  // createdUser: User;
+  @Field(() => User)
+  createdUser: User;
 
   @Field(() => String)
   updatedBy: string;
@@ -20,6 +20,6 @@ export abstract class BaseNode {
   @Field(() => ISODateTimeScalar)
   updatedAt: string;
 
-  // @Field(() => User)
-  // updatedUser: User;
+  @Field(() => User)
+  updatedUser: User;
 }

@@ -20,10 +20,14 @@ import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ChatModule } from './chat/chat.module';
+import { DataLoaderModule } from './data-loader/data-loader.module';
+import { GraphModule } from './graphql/graphql.module';
 import { MATERIAL_PACKAGE_NAME } from './proto/material';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    DataLoaderModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.register({
       isGlobal: true,
@@ -74,14 +78,21 @@ import { MATERIAL_PACKAGE_NAME } from './proto/material';
         },
       ],
     }),
+    AuthModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
+      subscriptions: {
+        'graphql-ws': {
+          path: '/graphql',
+        },
+      },
       autoSchemaFile: true,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
-    AuthModule,
+    GraphModule,
     ChatModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [...appProviders, AppService, AppResolver],

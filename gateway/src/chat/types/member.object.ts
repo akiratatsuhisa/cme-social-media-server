@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ChatModels } from 'factory';
 import { BaseNode } from 'src/graphql/models';
+import { User } from 'src/user/types';
 
 import { Room } from './room.object';
 
@@ -18,8 +19,8 @@ export class Member implements BaseNode, ChatModels.IMember {
   @Field(() => String)
   memberId: string;
 
-  // @Field(() => User)
-  // member: User;
+  @Field(() => User)
+  member: User;
 
   @Field(() => String, { nullable: true })
   nickName: string;
@@ -29,13 +30,13 @@ export class Member implements BaseNode, ChatModels.IMember {
 
   createdBy: string;
 
-  // createdUser: User;
+  createdUser: User;
 
   createdAt: string;
 
   updatedBy: string;
 
-  // updatedUser: User;
+  updatedUser: User;
 
   updatedAt: string;
 }

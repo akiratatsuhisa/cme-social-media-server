@@ -1,4 +1,4 @@
-import { IIdentityUser } from '..';
+import { IIdentityUser, UserModels } from '..';
 
 export namespace UserService {
   export const name = 'USER_SERVICE';
@@ -19,5 +19,15 @@ export namespace UserService {
     };
 
     export type Result = IIdentityUser;
+  }
+
+  export namespace GetUsersLazy {
+    export const pattern = 'GET_USERS_LAZY';
+
+    export type Input = {
+      ids?: Array<string>;
+    };
+
+    export type Result = Record<string, UserModels.IUser>;
   }
 }

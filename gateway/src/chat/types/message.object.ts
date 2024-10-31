@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ChatModels } from 'factory';
 import { BaseNode } from 'src/graphql/models';
+import { User } from 'src/user/types';
 
 import { Room } from './room.object';
 
@@ -18,8 +19,8 @@ export class Message implements BaseNode, ChatModels.IMessage {
   @Field(() => String)
   authorId: string;
 
-  // @Field(() => User)
-  // author: User;
+  @Field(() => User)
+  author: User;
 
   @Field(() => ChatModels.MessageTypes)
   type: ChatModels.MessageTypes;
@@ -27,18 +28,18 @@ export class Message implements BaseNode, ChatModels.IMessage {
   @Field(() => Number, { nullable: true })
   mediaCount: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   content: unknown;
 
   createdBy: string;
 
-  // createdUser: User;
+  createdUser: User;
 
   createdAt: string;
 
   updatedBy: string;
 
-  // updatedUser: User;
+  updatedUser: User;
 
   updatedAt: string;
 }

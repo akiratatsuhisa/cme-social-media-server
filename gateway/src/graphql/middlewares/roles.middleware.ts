@@ -1,6 +1,7 @@
 import { ForbiddenException } from '@nestjs/common';
 import { FieldMiddleware, MiddlewareContext, NextFn } from '@nestjs/graphql';
 import { Enums } from 'factory';
+import { IncomingMessage } from 'http';
 
 /**
  * By using decortor Extensions({roles: ["Administrator", "U"] })
@@ -22,7 +23,12 @@ export const roleMiddleware: FieldMiddleware = async (
     return next();
   }
 
-  const userRoles: Array<Enums.Auth0Role> = context.req.user?.roles ?? [];
+  const request =
+    context.req instanceof IncomingMessage
+      ? context.req
+      : context.req.extra.request;
+
+  const userRoles: Array<Enums.Auth0Role> = request.user?.roles ?? [];
 
   if (requiredRoles.some((role) => userRoles.includes(role))) {
     return next();
