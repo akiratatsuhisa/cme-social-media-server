@@ -4,7 +4,33 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import dayjs from 'dayjs';
-import { IdentityUser } from 'factory';
+import { Enums, IIdentityUser } from 'factory';
+
+class IdentityUser implements IIdentityUser {
+  sub: string;
+  nickname: string;
+  name: string;
+  picture: string;
+  updatedAt: string;
+  email: string;
+  emailVerified: boolean;
+  userMetadata: Record<string, any>;
+  appMetadata: Record<string, any>;
+  roles: Array<Enums.Auth0Role>;
+
+  constructor(payload?: Record<string, any>) {
+    this.sub = payload?.sub;
+    this.nickname = payload?.nickname;
+    this.name = payload?.name;
+    this.picture = payload?.picture;
+    this.updatedAt = payload?.updated_at ?? payload?.updatedAt;
+    this.email = payload?.email;
+    this.emailVerified = payload?.email_verified ?? payload?.emailVerified;
+    this.userMetadata = payload?.user_metadata ?? payload?.userMetadata;
+    this.appMetadata = payload?.app_metadata ?? payload?.appMetadata;
+    this.roles = payload?.user_roles ?? payload?.roles;
+  }
+}
 
 @Injectable()
 export class AppService {
@@ -19,7 +45,7 @@ export class AppService {
   async getUserInfo(
     token: string,
     payload: Record<string, any>,
-  ): Promise<IdentityUser> {
+  ): Promise<IIdentityUser> {
     const key = `${this.cachePrefix}:${payload.sub}`;
     const cache = await this.cacheManager.get<string>(key);
 
@@ -51,7 +77,7 @@ export class AppService {
     }
   }
 
-  async getUserInfoOrThrow(sub: string) {
+  async getUserInfoOrThrow(sub: string): Promise<IIdentityUser> {
     const key = `${this.cachePrefix}:${sub}`;
     const cache = await this.cacheManager.get<string>(key);
 

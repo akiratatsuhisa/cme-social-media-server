@@ -9,7 +9,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { Enums } from 'factory';
 import { IncomingMessage } from 'http';
 
-import { IdentityUser, IS_PUBLIC_KEY, ROLES_KEY } from '../decorators';
+import { IIdentityUser, IS_PUBLIC_KEY, ROLES_KEY } from '../decorators';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -23,7 +23,7 @@ export class RolesGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const { user } = this.getRequest(context) as IncomingMessage & {
-      user: IdentityUser | null;
+      user: IIdentityUser | null;
     };
 
     const isPublic =

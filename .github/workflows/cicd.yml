@@ -45,7 +45,12 @@ jobs:
       - name: Run build
         run: |
           yarn workspace factory build
-
+          yarn workspace user build
+          yarn workspace chat build
+          yarn workspace post build
+          yarn workspace notification build
+          yarn workspace search build
+          yarn workspace gateway build
 
   deploy:
     needs:

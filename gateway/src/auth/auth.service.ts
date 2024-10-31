@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { IdentityUser, UserService } from 'factory';
+import { IIdentityUser, UserService } from 'factory';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
   async getUserInfo(
     token: string,
     payload: Record<string, any>,
-  ): Promise<IdentityUser | null> {
+  ): Promise<IIdentityUser | null> {
     const result = await firstValueFrom(
       this.client.send<
         UserService.GetUserInfo.Result,

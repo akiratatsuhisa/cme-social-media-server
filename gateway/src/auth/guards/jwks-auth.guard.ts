@@ -8,7 +8,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { IncomingMessage } from 'http';
 
-import { IdentityUser, IS_PUBLIC_KEY } from '../decorators';
+import { IIdentityUser, IS_PUBLIC_KEY } from '../decorators';
 
 @Injectable()
 export class JwksAuthGuard extends AuthGuard('jwt') {
@@ -24,7 +24,7 @@ export class JwksAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(
     err: unknown,
-    user: IdentityUser,
+    user: IIdentityUser,
     _info: unknown,
     context: ExecutionContext,
   ) {

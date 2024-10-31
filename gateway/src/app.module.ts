@@ -19,6 +19,7 @@ import { appProviders } from './app.providers';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { ChatModule } from './chat/chat.module';
 import { MATERIAL_PACKAGE_NAME } from './proto/material';
 
 @Module({
@@ -53,6 +54,10 @@ import { MATERIAL_PACKAGE_NAME } from './proto/material';
           options: { port: NotificationService.port },
         },
         {
+          /**
+           * https://github.com/grpc/grpc-node/blob/master/packages/proto-loader/README.md
+           * To configure the response type of the data, pay attention to the `loader` options
+           */
           name: MaterialYouService.name,
           transport: Transport.GRPC,
           options: {
@@ -76,6 +81,7 @@ import { MATERIAL_PACKAGE_NAME } from './proto/material';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     AuthModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [...appProviders, AppService, AppResolver],

@@ -1,4 +1,4 @@
-import { IdentityUser } from '..';
+import { IIdentityUser } from '..';
 
 export namespace UserService {
   export const name = 'USER_SERVICE';
@@ -18,6 +18,6 @@ export namespace UserService {
       payload: Record<string, any>;
     };
 
-    export type Result = IdentityUser;
+    export type Result = IIdentityUser;
   }
 }
