@@ -17,7 +17,7 @@ export class UsersService {
       FilterProps,
       string,
       UserModels.IUser
-    >({ __key: 'loadUserById' }, async (keys) => {
+    >({ __key: 'LOAD_USER_BY_ID' }, async (keys) => {
       const map = await firstValueFrom(
         this.client.send<
           UserService.GetUsersLazy.Result,

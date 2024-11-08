@@ -25,7 +25,7 @@ jobs:
         run: yarn
 
       - name: Run check eslint and prettier
-        run: yarn check
+        run: yarn check:all
 
   build:
     runs-on: ubuntu-latest

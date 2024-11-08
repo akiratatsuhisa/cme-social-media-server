@@ -12,8 +12,8 @@
     "check:prettier": "prettier --check \"{gateway,services/*,packages/*}/{src,test}/**/*.ts\"",
     "fix:lint": "eslint \"{gateway,services/*,packages/*}/{src,test}/**/*.ts\" --fix",
     "check:lint": "eslint \"{gateway,services/*,packages/*}/{src,test}/**/*.ts\"",
-    "format": "yarn format:prettier && yarn fix:lint",
-    "check": "yarn check:prettier && yarn check:lint"
+    "format:all": "yarn format:prettier && yarn fix:lint",
+    "check:all": "yarn check:prettier && yarn check:lint"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.2",
